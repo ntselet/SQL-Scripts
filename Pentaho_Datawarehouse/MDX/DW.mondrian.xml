@@ -1,0 +1,56 @@
+<Schema name="SchemaTest">
+  <Cube name="Customer" visible="true" cache="true" enabled="true">
+    <Table name="DimCUSTOMER">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="CUSTOMER_ID" highCardinality="false" name="CustomerG">
+      <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true" allMemberName="All; Countries">
+        <Table name="DimProducts">
+        </Table>
+        <Level name="CostomerCountry" visible="true" table="DimProducts" column="PRODUCT_NAME" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Product" visible="true" column="PRODUCT_NAME" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="CUSTOMER_ID" highCardinality="false" name="CostomerContact">
+      <Hierarchy name="Hierarchy 1" visible="true" hasAll="true" allMemberName="All Contacts">
+        <Table name="DimEmployee">
+        </Table>
+        <Level name="CustomerNames" visible="true" table="DimEmployee" column="FIRST_NAME" type="String" internalType="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="CustomerCount" column="CUSTOMER_ID" datatype="Integer" formatString="####" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="sales" visible="true" cache="true" enabled="true">
+    <Table name="Sales_Fact">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="ORDER_ID" highCardinality="false" name="Calc">
+      <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true" allMemberName="total">
+        <Table name="Sales_Fact">
+        </Table>
+        <Level name="New Level 0" visible="true" table="Sales_Fact" column="Rands_sold" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Total Rand" column="Rands_sold" datatype="Boolean" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Employee" visible="true" cache="true" enabled="true">
+    <Table name="DimEmployee">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="EMPLOYEE_ID" highCardinality="false" name="Employee dim">
+      <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true" allMemberName="Salary">
+        <Table name="DimEmployee">
+        </Table>
+        <Level name="Salary" visible="true" table="DimEmployee" column="SALARY" nameColumn="SALARY" type="Integer" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="FirstName" visible="true" table="DimEmployee" column="FIRST_NAME" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Employee Salary" column="SALARY" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

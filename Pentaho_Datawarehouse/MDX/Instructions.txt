@@ -1,0 +1,8 @@
+Connection Name: dstorecon
+Connection Type: MySQL
+Access: Native (JDBC)
+Host Name: localhost
+Database Name: store
+Port Number: 3306
+User Name: root
+Password: 2Lasizwe

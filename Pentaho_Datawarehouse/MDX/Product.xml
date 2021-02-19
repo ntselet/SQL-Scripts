@@ -1,0 +1,18 @@
+<Schema name="DStore">
+  <Cube name="Products" visible="true" cache="true" enabled="true">
+    <Table name="DimProducts">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="PRODUCT_ID" highCardinality="false" name="Products">
+      <Hierarchy name="New Hierarchy 0" visible="true" hasAll="true">
+        <Table name="DimProducts">
+        </Table>
+        <Level name="Name" visible="true" table="DimProducts" column="PRODUCT_NAME" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Cat" visible="true" table="DimProducts" column="CATEGORY_NAME" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Product_number" column="PRODUCT_ID" aggregator="distinct-count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
